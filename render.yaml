@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: n8n-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_PROTOCOL
+        value: https
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: true
+      - key: N8N_BASIC_AUTH_USER
+        fromSecret: N8N_USER
+      - key: N8N_BASIC_AUTH_PASSWORD
+        fromSecret: N8N_PASSWORD
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_HOST
+        fromSecret: DB_HOST
+      - key: DB_POSTGRESDB_PORT
+        value: 5432
+      - key: DB_POSTGRESDB_DATABASE
+        fromSecret: DB_NAME
+      - key: DB_POSTGRESDB_USER
+        fromSecret: DB_USER
+      - key: DB_POSTGRESDB_PASSWORD
+        fromSecret: DB_PASSWORD
+      - key: N8N_ENCRYPTION_KEY
+        fromSecret: ENCRYPTION_KEY
